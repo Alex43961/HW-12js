@@ -37,7 +37,7 @@
 //Итого:
 //Должна получиться своеобразная База Данных пользователей, которую можно пополнять новыми пользователями и искать существующих.
 
-const users = [
+let users = [
 	{
 		name: "John",
 		surname: "Doe",
@@ -60,15 +60,19 @@ const users = [
 		password: 5555,
 	}
 ];
+console.log(`${users[1].name}`);
 
 
 
 isRunning = true;
 while (isRunning) {
-	const greeting = prompt("Do you want a)Registre, b) Log in, с)See the list of users d)Change your datd, q)Quit?");
-	switch (greeting.toLowerCase()) {
+	const greeting = prompt("Do you want a)Registre, b) Log in, с)See the list of users d)Change your data, q)Quit?");
+	const gteetingToUser = greeting.toLowerCase();
+	switch (gteetingToUser) {
 		case "a":
 			registreUser();
+			console.log("[users]", users);
+			console.log("New user was added " + `${users[users.length - 1].name} ` + `${users[users.length - 1].surname}`);
 			break;
 		case "b":
 			loginUser();
@@ -89,3 +93,20 @@ while (isRunning) {
 	}
 }
 
+function registreUser(userList) {
+	let userName = prompt("Enter yuor name");
+	let userSurname = prompt("Enter yuor surname");
+	let userAge = prompt("Enter your age");
+	let userEmail = prompt("Enter your Email");
+
+	let isCount = true;
+	while (isCount) {
+		let userPassword = prompt("Enter your password");
+		let dubleUserPassword = prompt("Repeat your password");
+		if (userPassword === dubleUserPassword) {
+			userList = users.push({ name: `${userName}`, surname: `${userSurname}`, age: `${userAge}`, email: `${userEmail}`, password: `${userPassword}` });
+			isCount = false;
+			return userList;
+		}
+	}
+}
