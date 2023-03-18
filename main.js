@@ -60,29 +60,34 @@ let users = [
 		password: 5555,
 	}
 ];
-console.log(`${users[1].name}`);
+
 
 
 
 isRunning = true;
 while (isRunning) {
-	const greeting = prompt("Do you want a)Registre, b) Log in, с)See the list of users d)Change your data, q)Quit?");
+	const greeting = prompt("Do you want a)Registre, b) Log in, q)Quit?");
 	const gteetingToUser = greeting.toLowerCase();
 	switch (gteetingToUser) {
 		case "a":
 			registreUser();
 			console.log("[users]", users);
 			console.log("New user was added " + `${users[users.length - 1].name} ` + `${users[users.length - 1].surname}`);
+			const secondQuestion = confirm("Are you want to continue?")
+			if (secondQuestion === false) {
+				alert("Good baye " + `${users[users.length - 1].name} ` + `${users[users.length - 1].surname}` + " !");
+				isRunning = false;
+			}
 			break;
 		case "b":
 			loginUser();
 			break;
-		case "c":
-			seeTheUsersList();
-			break;
-		case "d":
-			exchangeDataUser();
-			break;
+		//case "c":
+		//	seeTheUsersList();
+		//	break;
+		//case "d":
+		//	exchangeDataUser();
+		//	break;
 		case "q":
 			isRunning = false;
 			break;
@@ -94,10 +99,10 @@ while (isRunning) {
 }
 
 function registreUser(userList) {
-	let userName = prompt("Enter yuor name");
-	let userSurname = prompt("Enter yuor surname");
-	let userAge = prompt("Enter your age");
-	let userEmail = prompt("Enter your Email");
+	const userName = prompt("Enter yuor name");
+	const userSurname = prompt("Enter yuor surname");
+	const userAge = prompt("Enter your age");
+	const userEmail = prompt("Enter your Email");
 
 	let isCount = true;
 	while (isCount) {
@@ -109,4 +114,25 @@ function registreUser(userList) {
 			return userList;
 		}
 	}
+}
+function loginUser(params) {
+	let isCount = true;
+	while (isCount) {
+		const userEmail = prompt("Enter your Email");
+		if (userEmail === users.indexOf[email]) {
+			isCount = false;
+		} else {
+			alert("No such am email was found. Try again.")
+		}
+	}
+	let isRunning = true;
+	while (isRunning) {
+		const userPassword = prompt("Enter your Email");
+		if (userPassword === users.indexOf[password]) {
+			isRunning = false;
+		} else {
+			alert("No such am email was found. Try again.")
+		}
+	}
+
 }
