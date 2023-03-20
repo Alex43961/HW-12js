@@ -80,15 +80,16 @@ while (isRunning) {
 			}
 			break;
 		case "b":
-			loginUser();
+			loginUser(users);
 			break;
-		//case "c":
-		//	seeTheUsersList();
-		//	break;
+		case "c":
+			seeTheUsersList();
+			break;
 		//case "d":
 		//	exchangeDataUser();
 		//	break;
 		case "q":
+			alert("See you soon. Good baye!")
 			isRunning = false;
 			break;
 
@@ -98,7 +99,7 @@ while (isRunning) {
 	}
 }
 
-function registreUser(userList) {
+function registreUser(usersList) {
 	const userName = prompt("Enter yuor name");
 	const userSurname = prompt("Enter yuor surname");
 	const userAge = prompt("Enter your age");
@@ -109,30 +110,35 @@ function registreUser(userList) {
 		let userPassword = prompt("Enter your password");
 		let dubleUserPassword = prompt("Repeat your password");
 		if (userPassword === dubleUserPassword) {
-			userList = users.push({ name: `${userName}`, surname: `${userSurname}`, age: `${userAge}`, email: `${userEmail}`, password: `${userPassword}` });
+			usersList = users.push({ name: `${userName}`, surname: `${userSurname}`, age: `${userAge}`, email: `${userEmail}`, password: `${userPassword}` });
 			isCount = false;
-			return userList;
+			return usersList;
 		}
 	}
 }
-function loginUser(params) {
+function loginUser(usersList) {
 	let isCount = true;
+	const userEmail = prompt("Enter your Email");
+
+	const userPassword = prompt("Enter your password");
+
+
 	while (isCount) {
-		const userEmail = prompt("Enter your Email");
-		if (userEmail === users.indexOf[email]) {
-			isCount = false;
-		} else {
-			alert("No such am email was found. Try again.")
+
+		for (let i = 0; i < usersList.length; i++) {
+
+			if (userEmail === usersList[i].email && userPassword === usersList[i].password) {
+				alert("User was saccessful loged in");
+				console.log(usersList[i]);
+				isCount = false;
+				return usersList[i];
+			}
 		}
+		isCount = alert("No such user was found. Try another time.");
 	}
-	let isRunning = true;
-	while (isRunning) {
-		const userPassword = prompt("Enter your Email");
-		if (userPassword === users.indexOf[password]) {
-			isRunning = false;
-		} else {
-			alert("No such am email was found. Try again.")
-		}
-	}
+}
+
+function seeTheUsersList(usersList) {
+	
 
 }
