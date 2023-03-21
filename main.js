@@ -1,3 +1,4 @@
+"use strict";
 //Задание
 //Создать программу, которая с помощью alert поздоровается с пользователем, а затем, с помощью prompt предложит выбрать один из пунктов:
 
@@ -64,13 +65,13 @@ let users = [
 
 
 
-isRunning = true;
+let isRunning = true;
 while (isRunning) {
-	const greeting = prompt("Do you want a)Registre, b) Log in, q)Quit?");
+	const greeting = prompt("Do you want a)Registre, b) Log in, c)See the list of users, d) change user's data, q)Quit?");
 	const gteetingToUser = greeting.toLowerCase();
 	switch (gteetingToUser) {
 		case "a":
-			registreUser();
+			registreUser(users);
 			console.log("[users]", users);
 			console.log("New user was added " + `${users[users.length - 1].name} ` + `${users[users.length - 1].surname}`);
 			const secondQuestion = confirm("Are you want to continue?")
@@ -83,11 +84,11 @@ while (isRunning) {
 			loginUser(users);
 			break;
 		case "c":
-			seeTheUsersList();
+			seeTheUsersList(users);
 			break;
-		//case "d":
-		//	exchangeDataUser();
-		//	break;
+		case "d":
+			exchangeDataUser(users);
+			break;
 		case "q":
 			alert("See you soon. Good baye!")
 			isRunning = false;
@@ -130,8 +131,9 @@ function loginUser(usersList) {
 			if (userEmail === usersList[i].email && userPassword === usersList[i].password) {
 				alert("User was saccessful loged in");
 				console.log(usersList[i]);
-				isCount = false;
+
 				return usersList[i];
+				isCount = false;
 			}
 		}
 		isCount = alert("No such user was found. Try another time.");
@@ -139,6 +141,100 @@ function loginUser(usersList) {
 }
 
 function seeTheUsersList(usersList) {
-	
-
+	const amountOfUsers = console.log("There are " + `${usersList.length} ` + "users was registred:");
+	if (usersList.length == 0) {
+		return console.log("There are no users yet");
+	}
+	for (let i = 0; i < usersList.length; i++) {
+		console.log(usersList[i]);
+		console.log("-----------------");
+	}
 }
+
+function exchangeDataUser(usersList) {
+
+	const userName = prompt("Enter your name");
+	let isRunning = true;
+	while (isRunning) {
+
+		const whatNeedExchange = prompt("Woul'd you like exchange: a)Name, b)Surname, c)Age, d)Email, e)Password, q)Quit");
+		switch (whatNeedExchange.toLowerCase()) {
+			case "a":
+
+				const exchangeName = prompt("Enter new name");
+
+				for (let i = 0; i < usersList.length; i++) {
+					if (usersList[i].name === userName) {
+						usersList[i].name = exchangeName;
+						alert("Your name was changed");
+						console.log(usersList[i]);
+						isRunning = false;
+					}
+				}
+
+				break;
+			case "b":
+
+				const userSurname = prompt("Enter your surname")
+				const exchangeSurname = prompt("Enter new surname");
+
+				for (let i = 0; i < usersList.length; i++) {
+					if (usersList[i].name === userName && usersList[i].surname === userSurname) {
+						usersList[i].surname = exchangeSurname;
+						alert("Your surname was changed");
+						console.log(usersList[i]);
+					}
+				}
+
+				break;
+			case "c":
+				const userAge = prompt("Enter your age");
+				const exchangeAge = prompt("Enter new age");
+
+				for (let i = 0; i < usersList.length; i++) {
+					if (usersList[i].name === userName && usersList[i].age === userAge) {
+						usersList[i].age = exchangeAge;
+						alert("Your age was changed");
+						console.log(usersList[i]);
+					}
+				}
+
+				break;
+			case "d":
+				const userEmail = prompt("Enter your email");
+				const exchangeEmail = prompt("Enter new email");
+
+				for (let i = 0; i < usersList.length; i++) {
+					if (usersList[i].name === userName && usersList[i].email === userEmail) {
+						usersList[i].email = exchangeEmail;
+						alert("Your email was changed");
+						console.log(usersList[i]);
+					}
+				}
+
+				break;
+			case "e":
+				const userPassword = prompt("Enter your password")
+				const exchangePassword = prompt("Enter new password");
+
+				for (let i = 0; i < usersList.length; i++) {
+					if (usersList[i].name === userName && usersList[i].password === userPassword) {
+						usersList[i].password = exchangePassword;
+						alert("Your password was changed");
+						console.log(usersList[i]);
+					}
+				}
+
+				break;
+			case "q":
+				alert("Back to mine menu")
+				isRunning = false;
+				break;
+
+			default:
+				alert("Something went wrong. Try again.")
+				break;
+		}
+	}
+}
+
